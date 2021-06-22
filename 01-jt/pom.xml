@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cy</groupId>
+    <artifactId>01-jt</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>jt-common</module>
+        <module>jt-gateway</module>
+        <module>jt-portal</module>
+        <module>jt-generator</module>
+    </modules>
+    <properties>
+        <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
+    </properties>
+    <!-- 当一个父工程只做依赖版本管理，打包方式设置为pom(默认方式是jar) -->
+    <!-- 打包成pom的解释：只生成自己的构件，没有代码的测试或编译，也没有资源需要处理，只是为了聚合工程或者传递依赖 -->
+    <packaging>pom</packaging>
+
+    <!-- 依赖管理元素 -->
+    <!--
+        spring-boot-dependencies 用于方便管理项目的依赖，
+        只需在 dependencyManagement 里面配置好 spring-boot-dependencies 的版本，
+        在 dependencies 里面就不用再指定其它版本号了
+     -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- 这里的依赖在子工程需要时可以直接import -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <!-- 这里的${}表达式中的内容来自pom文件的properties元素} -->
+                <version>${spring.boot.version}</version>
+                <!-- 这个import表示可以引用artifactId元素中定义的依赖 -->
+                <scope>import</scope>
+                <!-- 当scope元素的值为import时 这里的type元素的值必须为pom -->
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+</project>
