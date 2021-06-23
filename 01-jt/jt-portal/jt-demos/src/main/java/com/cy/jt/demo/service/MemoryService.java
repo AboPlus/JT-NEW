@@ -16,13 +16,14 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 public class MemoryService {
 
-    private Map<String,Object> cache = new ConcurrentHashMap<>();
+    /*private Map<String,Object> cache = new ConcurrentHashMap<>();*/
     /** 本地缓存（JVM内部的缓存） */
+    @Cacheable(value = "memoryCache")  //由此注解描述的方法为缓存切入点
     public List<Map<String,Object>> list(){
-        if (cache.containsKey("memoryKey")) {
+        /*if (cache.containsKey("memoryKey")) {
             //将来这个key为参数列表的组合
             return (List<Map<String,Object>>)cache.get("memoryKey");
-        }
+        }*/
         System.out.println("Get Data from DataBase ");
         // 假设如下数据来自数据库
         Map<String,Object> m1 = new HashMap<>();
@@ -34,7 +35,7 @@ public class MemoryService {
         List<Map<String,Object>> list = new ArrayList<>();
         list.add(m1);
         list.add(m2);
-        cache.put("memoryKey", list);
+        /*cache.put("memoryKey", list);*/
         return list;
     }
 
