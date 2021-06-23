@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>jt-member</module>
+        <module>jt-demos</module>
     </modules>
 
 
