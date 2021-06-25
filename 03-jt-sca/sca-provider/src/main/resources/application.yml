@@ -2,7 +2,7 @@ server:
   port: 8081
 spring:
   application:
-    name: nacos-provider
+    name: sca-provider
   cloud:
     nacos:
       #服务注册
