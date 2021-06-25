@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sca-provider</artifactId>
+    <artifactId>sca-consumer</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -17,7 +17,6 @@
     </properties>
 
     <dependencies>
-        <!-- web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
