@@ -7,14 +7,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * @EnableFeignClients:当我们的主启动类被该注解描述时，spring工程在启动时
+ * 会扫描@FeignClient注解描述的接口，并基于接口创建其实现类
+ * (代理类)
  * @author Abo
  */
+@EnableFeignClients
 @SpringBootApplication
 public class ScaConsumerApplication {
     public static void main(String[] args) {
