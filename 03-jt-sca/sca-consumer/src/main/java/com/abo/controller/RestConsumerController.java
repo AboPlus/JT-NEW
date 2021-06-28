@@ -48,11 +48,12 @@ public class RestConsumerController {
         //return "update ok";
         // 假如希望获取服务提供方执行更新操作时的响应结果，可以采用如下方式
         HttpEntity requestEntity = new HttpEntity(map);
-        ResponseEntity<Map> exchange = loadBalancedRestTemplate.exchange(url,
-                HttpMethod.PUT,
-                requestEntity,
-                Map.class);
-        return exchange.getBody();
+        ResponseEntity<Map> exchange = loadBalancedRestTemplate.exchange(
+                url,    //请求url
+                HttpMethod.PUT, // 请求方式
+                requestEntity,  // 请求实体
+                Map.class);     //响应数据类型
+        return exchange.getBody();  // 获取响应体数据
     }
 
 
