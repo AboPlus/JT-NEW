@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,16 @@ public class ScaConsumerApplication {
     public RestTemplate restTemplate(){
         return new RestTemplate();
     }
+    /**
+     * @Bean注解由Spring提供，通常用于描述方法，用于告诉spring框架
+     * 此方法的返回值要交给spring管理，类似@Controller。@Service，@Component(这些注解一般描述类)
+     */
+    @Bean
+    @LoadBalanced
+    public RestTemplate loadBalancedRestTemplate(){
+        return new RestTemplate();
+    }
+
     @RestController
     public class ConsumerController{
 
@@ -42,7 +53,8 @@ public class ScaConsumerApplication {
         }
 
 
-        //LoadBalancerClient 此对象低层基于Ribbon实现负载均衡
+        // LoadBalancerClient 此对象低层基于Ribbon实现负载均衡
+        // LoadBalancerClient对象再服务启动时低层已经帮我们创建好了
         @Autowired
         private LoadBalancerClient loadBalancerClient;
         @GetMapping("/consumer/doRestEcho02")
@@ -57,6 +69,14 @@ public class ScaConsumerApplication {
             String url = String.format("http://%s:%s/provider/echo/%s", ip, port, consumerName);
             // 调用服务提供方(sca-provider)
             return restTemplate.getForObject(url, String.class);
+        }
+
+        @Autowired
+        private RestTemplate loadBalancedRestTemplate;
+        @GetMapping("/consumer/doRestEcho03")
+        public String doRestEcho03() {
+            String url = String.format("http://%s/provider/echo/%s", "sca-provider", consumerName);
+            return loadBalancedRestTemplate.getForObject(url, String.class);
         }
 
 
