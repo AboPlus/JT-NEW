@@ -5,4 +5,9 @@ spring:
     name: sca-consumer
   cloud:
     nacos:
-      server-addr: localhost:8848
+      # 发现地址
+      discovery:
+        server-addr: localhost:8848
+logging:
+  level:
+    com.abo: debug

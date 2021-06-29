@@ -1,0 +1,14 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: sca-provider
+  cloud:
+    nacos:
+      discovery:  # 服务注册
+        server-addr: localhost:8848
+      config:  # 服务配置
+        server-addr: localhost:8848
+        group: DEV_GROUP_51
+        file-extension: yml
+        namespace: 430756e3-1e02-400e-9186-7a3c4c8d9726

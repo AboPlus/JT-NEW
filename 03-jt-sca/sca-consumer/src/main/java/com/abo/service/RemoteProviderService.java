@@ -2,8 +2,9 @@ package com.abo.service;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @FeignClient:该注解描述接口时，用于告诉spring要为此接口创建实现类
@@ -22,4 +23,5 @@ public interface RemoteProviderService {
      */
     @GetMapping("/provider/echo/{msg}")
     String doEcho(@PathVariable("msg") String msg);
+
 }

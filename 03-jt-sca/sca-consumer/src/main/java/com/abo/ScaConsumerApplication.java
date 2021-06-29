@@ -1,5 +1,7 @@
 package com.abo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -22,8 +24,15 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients
 @SpringBootApplication
 public class ScaConsumerApplication {
+    // 创建日志对象 SLF4J
+    private static final Logger log = LoggerFactory.getLogger(ScaConsumerApplication.class);
     public static void main(String[] args) {
         SpringApplication.run(ScaConsumerApplication.class, args);
+        // debug<info<warn<error
+        log.warn("==warn==");
+        log.debug("==debug==");
+        log.info("==info==");
+        log.error("==error==");
     }
 
     /** springboot 工程中可以使用此对象调用第三方服务 */
@@ -51,6 +60,7 @@ public class ScaConsumerApplication {
         // http://localhost:8090/consumer/doRestEcho01
         @GetMapping("/consumer/doRestEcho01")
         public String doRestEcho01() {
+            log.debug("/consumer/doRestEcho01 {}","doRestEcho01");
             // 定义服务提供方的地址
             String url = "http://localhost:8081/provider/echo/"+consumerName;
             // 调用服务提供方(sca-provider)
