@@ -14,6 +14,7 @@ import java.sql.Connection;
 @SpringBootTest
 public class DataSourceTests {
 
+    // @Slf4j和下面这行代码只需要一个就可以了，@Slf4j低层会自动生成下面这行代码
     //private static final Logger log = LoggerFactory.getLogger(DataSourceTests.class);
 
     @Autowired
