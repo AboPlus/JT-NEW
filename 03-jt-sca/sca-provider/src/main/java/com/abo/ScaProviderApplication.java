@@ -35,6 +35,9 @@ public class ScaProviderApplication {
         private String logLevel;
         @Value("${server.tomcat.threads.max:200}")
         private Integer serverThreadMax;
+        @Value("${page.pageSize:10}")
+        private Integer pageSize;
+
         @GetMapping("/provider/doGetLogLevel")
         public String doGetLogLevel(){
             return "log level is " + logLevel;
@@ -45,6 +48,10 @@ public class ScaProviderApplication {
             return "tomcat max thread is " + serverThreadMax;
         }
 
+        @GetMapping("/provider/doGetPageSize")
+        public String doGetPageSize(){
+            return " page size is " + pageSize;
+        }
 
         @GetMapping("/provider/echo/{msg}")
         public String doEcho(@PathVariable String msg){

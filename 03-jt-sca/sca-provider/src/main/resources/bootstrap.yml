@@ -9,6 +9,16 @@ spring:
         server-addr: localhost:8848
       config:  # 服务配置
         server-addr: localhost:8848
-        group: DEV_GROUP_51
-        file-extension: yml
+        # 命名空间
         namespace: 430756e3-1e02-400e-9186-7a3c4c8d9726
+        # 分组名
+        group: DEV_GROUP_51
+        # 配置中心文件扩展名
+        file-extension: yml
+        # 共享配置
+        shared-configs[0]:
+          data-id: app-public-dev.yml
+          group: DEFAULT_GROUP
+          refresh: true #默认为false
+
+
