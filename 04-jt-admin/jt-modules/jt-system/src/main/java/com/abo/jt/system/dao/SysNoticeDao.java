@@ -2,6 +2,7 @@ package com.abo.jt.system.dao;
 
 import com.abo.jt.system.domain.SysNotice;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
