@@ -46,5 +46,5 @@ public interface SysNoticeDao {
      * @param id
      * @return
      */
-    SysNotice selectById(Integer id);
+    SysNotice selectById(Long id);
 }

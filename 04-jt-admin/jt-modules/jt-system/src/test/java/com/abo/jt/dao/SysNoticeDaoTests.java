@@ -28,7 +28,7 @@ public class SysNoticeDaoTests {
 
     @Test
     void testSelectById(){
-        SysNotice notice = sysNoticeDao.selectById(1);
+        SysNotice notice = sysNoticeDao.selectById(1L);
         log.debug("notice id is {}",notice);
     }
 
