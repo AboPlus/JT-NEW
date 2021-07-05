@@ -1,4 +1,4 @@
-package com.abo.jt.system.web.vo;
+package com.abo.jt.common.vo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -19,6 +19,7 @@ public class JsonResult implements Serializable {
     /** 一般对应查询结果,可以将查询结果赋值给此属性 */
     private Object data;
 
+    public JsonResult(){}
     public JsonResult(String message){
         this.message = message;
     }

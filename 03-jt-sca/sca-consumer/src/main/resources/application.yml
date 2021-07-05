@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8092
 spring:
   application:
     name: sca-consumer
@@ -8,6 +8,20 @@ spring:
       # 发现地址
       discovery:
         server-addr: localhost:8848
+    sentinel:
+      transport:
+        port: 8719 #跟sentinel控制台交流的端口,随意指定一个未使用的端口即可
+        dashboard: localhost:8180 #指定sentinel控制台地址。
+      eager: true #服务启动时就在sentinel面板进行注册
+      web-context-unify: true #聚合链路，默认为true，改为false根目录会改变(即没有sentinel_default_context目录)
+      datasource: #sentinel规则的持久化
+        ds:
+          nacos:
+            server-addr: localhost:8848 #nacos连接地址
+            group-id: DEFAULT_GROUP   #nacos连接的分组
+            rule-type: flow   #路由存储规则
+            data-id: sca-consumer-flow  #读取配置文件的data-id
+            data-type: json #读取配置文件类型为json
 logging:
   level:
     com.abo: debug

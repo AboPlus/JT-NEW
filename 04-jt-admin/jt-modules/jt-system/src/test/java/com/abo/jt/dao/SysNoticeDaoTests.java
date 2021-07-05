@@ -1,7 +1,7 @@
 package com.abo.jt.dao;
 
 import com.abo.jt.system.dao.SysNoticeDao;
-import com.abo.jt.system.domain.SysNotice;
+import com.abo.jt.common.domain.SysNotice;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

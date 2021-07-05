@@ -1,7 +1,8 @@
 package com.abo.jt.system.service;
 
 
-import com.abo.jt.system.domain.SysNotice;
+import com.abo.jt.common.domain.SysNotice;
+import com.abo.jt.common.domain.SysNotice;
 
 import java.util.List;
 

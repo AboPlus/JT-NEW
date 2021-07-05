@@ -1,5 +1,6 @@
 package com.abo;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,14 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @EnableFeignClients:当我们的主启动类被该注解描述时，spring工程在启动时
@@ -50,8 +56,21 @@ public class ScaConsumerApplication {
         return new RestTemplate();
     }
 
+    @Service
+    public class ConsumerService{
+        //流控：链路模式
+        @SentinelResource("doConsumerService")
+        public String doConsumerService(){
+            // 表示通过此方法访问指定资源，例如以后访问数据库
+            return "do consumer service";
+        }
+    }
+
+
     @RestController
     public class ConsumerController{
+        @Autowired
+        private ConsumerService consumerService;
 
         @Value("${spring.application.name}")
         private String consumerName;
@@ -88,10 +107,27 @@ public class ScaConsumerApplication {
 
         @Autowired
         private RestTemplate loadBalancedRestTemplate;
+        //创建一个可实现自增自减功能的一个对象
+        private AtomicLong atomicLong = new AtomicLong(0);
         @GetMapping("/consumer/doRestEcho03")
-        public String doRestEcho03() {
+        public String doRestEcho03() throws InterruptedException {
+           /* long num = atomicLong.getAndIncrement();//线程安全的自增
+            if (num%2 == 0){
+                Thread.sleep(200);//模拟耗时操作
+                //throw new RuntimeException("..."); //模拟异常比例
+            }*/
+            //流控规则中的链路限流
+            //consumerService.doConsumerService();
             String url = String.format("http://%s/provider/echo/%s", "sca-provider", consumerName);
             return loadBalancedRestTemplate.getForObject(url, String.class);
+        }
+
+        @GetMapping("/consumer/doRestEcho04")
+        @SentinelResource("doRestEcho04")
+        public String doRestEcho04(@RequestParam(required = false) Integer id,
+                                   @RequestParam(required = false) String name){
+            // %d表示数字的占位符  %s表示字符串的占位符
+            return String.format("request id is %d and request name is %s", id, name);
         }
 
 

@@ -1,4 +1,4 @@
-package com.abo.jt.system.domain;
+package com.abo.jt.common.domain;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

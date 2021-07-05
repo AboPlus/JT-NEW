@@ -1,7 +1,7 @@
 package com.abo.jt.system.service.impl;
 
 import com.abo.jt.system.dao.SysNoticeDao;
-import com.abo.jt.system.domain.SysNotice;
+import com.abo.jt.common.domain.SysNotice;
 import com.abo.jt.system.service.SysNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

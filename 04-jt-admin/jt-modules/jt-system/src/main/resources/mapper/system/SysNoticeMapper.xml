@@ -2,6 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 系统启动时会解析此配置文件，将解析后的结果存储到Map<String,MappedStatement>，
+     key为namespace+元素id，value为MappedStatement对象，
+     此对象中存储着解析id对应的元素时获取到的sql、参数、结果等信息 -->
 <mapper namespace="com.abo.jt.system.dao.SysNoticeDao">
 
     <sql id="selectNoticeId">
@@ -9,12 +12,12 @@
         from sys_notices
     </sql>
 
-    <select id="selectById" resultType="com.abo.jt.system.domain.SysNotice">
+    <select id="selectById" resultType="com.abo.jt.common.domain.SysNotice">
         <include refid="selectNoticeId"/>
-        where id = #{id}
+        where id=#{id}
     </select>
     
-    <select id="selectNotices" resultType="com.abo.jt.system.domain.SysNotice">
+    <select id="selectNotices" resultType="com.abo.jt.common.domain.SysNotice">
         <include refid="selectNoticeId"/>
         <where>
             <if test="title!=null and title!=''">
@@ -43,7 +46,7 @@
         </where>
     </delete>
     
-    <insert id="insertNotice" parameterType="com.abo.jt.system.domain.SysNotice">
+    <insert id="insertNotice" parameterType="com.abo.jt.common.domain.SysNotice">
         insert into sys_notices
         (title,type,content,status,remark,createdUser,modifiedUser,createdTime,modifiedTime)
         values
@@ -51,7 +54,7 @@
     </insert>
 
     <!--更新公告信息-->
-    <update id="updateNotice" parameterType="com.abo.jt.system.domain.SysNotice">
+    <update id="updateNotice" parameterType="com.abo.jt.common.domain.SysNotice">
         update sys_notices
         set title=#{title},
             content=#{content},
