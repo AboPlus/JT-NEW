@@ -1,0 +1,36 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: sca-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yml
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启服务发现机制，可以从注册中心获取服务(开启通过服务id去获取服务实例)
+      routes:  #配置路由规则，简单点理解就是请求转发
+        - id: route01
+          uri: lb://sca-consumer  #lb:loadBalance 表示负载均衡，不能随意写,这里的sca-consumer为服务名
+          predicates: ###匹配规则(谓词对象/断言对象)
+            - Path=/nacos/consumer/** # **表示可匹配多级目录
+            #- After=2021-07-04T23:59:59.789+08:00[Asia/Shanghai]
+            #- Header=X-Request-Id, \d+
+            #- Method=GET
+            #- Query=abo, ab.
+          filters: #http://ip:9000/nacos/consumer/**
+            - StripPrefix=1 #转发之前去掉path中第一层路径，例如nacos
+            #- AddRequestHeader=X-Request-Foo, Bar
+    sentinel:
+      transport:
+        dashboard: localhost:8180
+        port: 8719
+      eager: true
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: debug

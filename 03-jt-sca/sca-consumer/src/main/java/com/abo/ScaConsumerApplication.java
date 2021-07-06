@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -111,7 +114,7 @@ public class ScaConsumerApplication {
         private AtomicLong atomicLong = new AtomicLong(0);
         @GetMapping("/consumer/doRestEcho03")
         public String doRestEcho03() throws InterruptedException {
-           /* long num = atomicLong.getAndIncrement();//线程安全的自增
+            /* long num = atomicLong.getAndIncrement();//线程安全的自增
             if (num%2 == 0){
                 Thread.sleep(200);//模拟耗时操作
                 //throw new RuntimeException("..."); //模拟异常比例
