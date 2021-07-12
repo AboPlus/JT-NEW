@@ -75,6 +75,9 @@ public class JedisTests {
         jedis.close();
     }
 
+    /**
+     * 存储一篇博客内容
+     */
     @Test
     void testRedisHash(){
         //1.建立连接
@@ -127,7 +130,7 @@ public class JedisTests {
     @Test
     void testSet(){
         //1.连接redis
-        Jedis jedis = new Jedis(host,port);
+        Jedis jedis = new Jedis(host, port);
         //2.朋友圈点赞
         jedis.sadd("count", "1","2","3");
         //3.取出点赞数
