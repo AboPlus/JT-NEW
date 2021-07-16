@@ -10,22 +10,36 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class ResourceController {
-    @PreAuthorize("hasAuthority('/doCreate')")
+
+    /**
+     * hasAuthority('/doCreate')
+     * 访问doCreate方法必须拥有/doCreate 权限
+     * @return
+     */
+    @PreAuthorize("hasAuthority('sys:resource:create')")
     @RequestMapping("/doCreate")
     public String doCreate(){
         return "add resource";
     }
-    @PreAuthorize("hasAuthority('/doUpdate')")
+
+    /**
+     * hasAnyRole('jinpai')
+     * 访问doUpdate方法时必须拥有jinpai角色
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('jinpai')")
     @RequestMapping("doUpdate")
     public String doUpdate(){
         return "update resource";
     }
+
     @PreAuthorize("hasAuthority('/doDelete')")
     @RequestMapping("/doDelete")
     public String doDelete(){
         return "delete resource";
     }
-    @PreAuthorize("hasAuthority('/doRetrieve')")
+
+    @PreAuthorize("hasAuthority('sys:resource:retrieve')")
     @RequestMapping("/doRetrieve")
     public String doRetrieve(){
         return "retrieve resource";

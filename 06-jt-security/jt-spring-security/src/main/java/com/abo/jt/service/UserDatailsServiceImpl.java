@@ -33,7 +33,7 @@ public class UserDatailsServiceImpl implements UserDetailsService {
         String password = bCryptPasswordEncoder.encode("abo");
         /* 用户的权限 */
         List<GrantedAuthority> grantedAuthorities =
-                AuthorityUtils.commaSeparatedStringToAuthorityList("/doRetrieve,/doCreate");
+                AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_jinpai,ROLE_yinpai,sys:resource:retrieve,sys:resource:create");
         return new User(username, password, grantedAuthorities);
     }
 }

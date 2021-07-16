@@ -1,5 +1,6 @@
 package com.abo.jt.config;
 
+import com.abo.jt.util.SecurityExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -40,5 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login.html", "/images/**").permitAll()
                 //所有请求都要认证(除了上面的放行)
                 .anyRequest().authenticated();
+        //异常处理
+        http.exceptionHandling()
+                .accessDeniedHandler(new SecurityExceptionHandler())
+                .authenticationEntryPoint(new SecurityExceptionHandler());
     }
 }
