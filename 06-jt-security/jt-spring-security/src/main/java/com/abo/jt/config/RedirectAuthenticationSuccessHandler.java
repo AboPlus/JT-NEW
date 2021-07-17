@@ -14,7 +14,9 @@ import java.io.IOException;
  * @author Abo
  */
 public class RedirectAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-
+    /**
+     * redirectUrl之后接收的是需要重定向的目标地址，通过构造方法给成员变量赋值，在重写方法中调用重定向地址。
+     */
     private final String redirectUrl;
     public RedirectAuthenticationSuccessHandler(String redirectUrl){
         this.redirectUrl = redirectUrl;

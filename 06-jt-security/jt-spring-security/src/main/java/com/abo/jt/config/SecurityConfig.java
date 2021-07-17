@@ -32,11 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //处理登录请求的url,参数要和form表单中的action属性保持一致
                 .loginProcessingUrl("/login")
                 //登录成功默认页面,如果不设置默认是/index.html
-                .defaultSuccessUrl("/index.html")
+                .defaultSuccessUrl("/index.html");
                 // 配置好后可重定向
                 //.successHandler(new RedirectAuthenticationSuccessHandler("https://www.baidu.com"));
-                .and()
-                .logout()
+        http.logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login.html?logout");
         //设置认证规则(哪些资源必须登录后才能访问，哪些资源可以直接访问)

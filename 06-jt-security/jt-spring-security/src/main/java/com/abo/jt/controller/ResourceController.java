@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class ResourceController {
-
     /**
      * hasAuthority('/doCreate')
      * 访问doCreate方法必须拥有/doCreate 权限
@@ -44,5 +43,4 @@ public class ResourceController {
     public String doRetrieve(){
         return "retrieve resource";
     }
-
 }
